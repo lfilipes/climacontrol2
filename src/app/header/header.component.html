@@ -1,0 +1,38 @@
+<!-- src/app/header/header.component.html -->
+<header id="header" class="header">
+  <div class="header-page bg-primary">
+    <a class="toggle-offcanvas bg-primary" (click)="toggleNav()"><span></span></a>
+    <h1 class="header-page-siteTitle">
+      <a routerLink="/">Clima Control</a>
+    </h1>
+    <div class="header-page-authStatus">
+        <a *ngIf="!loggedIn" (click)="login()">Log In</a>
+        <span *ngIf="loggedIn">
+          {{userName}} <span class="opacity-half">|</span> <a (click)="logout()">Log Out</a>
+        </span>
+      </div>
+  </div>
+
+  <nav id="nav" class="nav" role="navigation">
+    <ul class="nav-list">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      </li>
+      <li>
+        <a
+          routerLink="/dash"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Dashboards</a>
+      </li>
+      <li>
+        <a
+          routerLink="/control"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Controle</a>
+      </li>
+    </ul>
+  </nav>
+</header>

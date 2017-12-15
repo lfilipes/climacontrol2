@@ -1,0 +1,29 @@
+ 
+<div *ngIf="loading">loading...</div>
+
+<div *ngIf="errorMessage" class="alert alert-warning">
+   <strong>Warning!</strong> {{errorMessage}}
+</div>
+
+<div *ngIf="deviceData" class='table-responsive'>
+   <table class='table'>
+   <thead>
+   <tr>
+       <th>Name</th>
+       <th>Device Type</th>
+       <th>Device ID</th>
+       <th>Description</th>
+       <th>Click for Device Data</th>
+   </tr>
+</thead>
+<tbody>
+   <tr *ngFor="let item of deviceData;">
+       <td> {{item.name}}</td>
+       <td>{{item.type}}</td>
+       <td>{{item.id.id}}</td>
+       <td>{{item.additionalInfo.description}}</td>
+       <td><button class="btn btn-primary"> View Data </button></td> 
+   </tr>
+</tbody>
+</table>
+</div>
