@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { _userName, _password, _tbBaseUrl, _customerId } from '../../core/env.config';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loading=true;
-    if (JSON.parse(localStorage.getItem('currentUser')) === null) {    
+    if (JSON.parse(localStorage.getItem('currentUser')) !== _customerId) {    
     this.apiService.tbLogin()
     .subscribe(response => {     
       if (response === true) {   // login successful
@@ -71,7 +72,6 @@ export class HomeComponent implements OnInit {
         this.getAssets(); 
       }     
   }
-
 
 login() {
   this.loading=true;
@@ -95,27 +95,9 @@ login() {
     this.apiService.getAssets(this.tbToken)
         .subscribe((data) => {
             this.assetData=data;
-            console.log('asssetdataobject test : ==========================>', this.assetData);
         },
         (error) => {this.errorMessage=error; this.loading=false; },
         () => {this.loading=false;})
-  }
-
-  getDevices() {
-    this.loading=true;
-    this.errorMessage="";
-    let tbUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.tbToken = tbUser.token; 
-    this.apiService.getDevices(this.tbToken)
-        .subscribe((data) => {
-            this.deviceData=data;
-            this.numberOfDevices = this.deviceData.length;
-            this.limit = this.deviceData.length;
-            console.log('device data object is: ==========================>', this.deviceData);
-        },
-        (error) => {this.errorMessage=error; this.loading=false; },
-        () => {this.loading=false;})
-
   }
 
   storeAssetId(id) {

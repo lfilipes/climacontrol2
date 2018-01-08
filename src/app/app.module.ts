@@ -14,6 +14,7 @@ import { DevicesComponent } from './pages/devices/devices.component';
 import { FilterPipe } from './core/filter-pipe';
 import { DashComponent } from './pages/dash/dash.component';
 import { ControlComponent } from './pages/control/control.component'; 
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -31,12 +32,13 @@ import { ControlComponent } from './pages/control/control.component';
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [
     Title,
     ApiService,
-    DataService
+    DataService    
   ],
   bootstrap: [AppComponent]
 })

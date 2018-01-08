@@ -12,7 +12,7 @@ export const ENV = {
   BASE_API: apiURI
 };
 
-export const _userName = 'lfilipe.email@gmail.com';
-export const _password = 'lfs123';
-export const _tbBaseUrl = "http://192.168.15.16:8080";
-export const _customerId = "194cf2b0-d06f-11e7-9c2a-5997ca966e82";
+export const _userName = 'colortel001@ucontrol.net.br';
+export const _password = 'Colortel@123';
+export const _tbBaseUrl = "http://35.199.99.95:8080";
+export const _customerId = "2d977a80-e2a6-11e7-a2cc-0b6a5e10d27e";

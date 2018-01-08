@@ -44,20 +44,6 @@ export class DevicesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.assetObject = this._dataService.assetId;
-    this.assetId=this.assetObject.id.id  
-    console.log('asset id is : ==========================>', this.assetId);
-    this.loading=true;
-    this.errorMessage="";
-    let tbUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.tbToken = tbUser.token; 
-    this.apiService.getDevices(this.tbToken)
-        .subscribe((data) => {
-            this.deviceData=data;
-            console.log('device data object is: ==========================>', this.deviceData);
-        },
-        (error) => {this.errorMessage=error; this.loading=false; },
-        () => {this.loading=false;})
-  }
 
+}
 }

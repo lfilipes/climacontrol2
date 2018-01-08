@@ -4,10 +4,12 @@ import { _userName, _password, _tbBaseUrl, _customerId } from './env.config';
 import { assetDataObject } from '../models/asset.class';
 import { deviceDataObject } from '../models/device.class';
 import { relationDataObject } from '../models/relation.class';
+import { temperatureTS,humidityTS,presenceTS,onoffTS,powerTS } from '../models/timeSeries.class';
 // import { AuthService } from './../auth/auth.service';  --TBD
 import {HttpModule, Http, Response, Headers, RequestOptions } from '@angular/http';
-//import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+//import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -29,9 +31,8 @@ export class ApiService {
   ) {
       // set token if saved in local storage
       var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-       this.token = currentUser && currentUser.token;
-     
-        
+       this.token = currentUser && currentUser.token;  
+    
    }
 
   // add your methods here 
@@ -77,33 +78,93 @@ export class ApiService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
-        return this.http.get(_relationUrl,
+        return this.http.get(_relationUrl,{headers: headers})
+                .map(res => res.json())
+                .catch(this.handleError)
+    }  
+
+////////////////   promisses alternative to get devices from asset 
+getDevFrAssetP(tbToken:string,_assetId:string): Promise<relationDataObject[]>
+{
+    const _relationUrl = _tbBaseUrl+'/api/relations/info?fromId='+_assetId+'&fromType=ASSET';
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
+      return this.http.get(_relationUrl,{headers: headers})
+      .toPromise()
+      .then(this.extractDataP)
+      .catch(this.handleError);   
+}
+
+private extractDataP(res: Response) {
+    let body = res.json();
+    return body || [];
+}
+
+    getDevice(tbToken:string,_deviceId:string): Observable<deviceDataObject> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
+//        http://192.168.1.104:8080/api/devices?deviceIds=efdb1870-d06f-11e7-9c2a-5997ca966e82
+        return this.http.get(_tbBaseUrl+'/api/devices?deviceIds='+_deviceId,
             {headers: headers})
                 .map(res => res.json())
                 .catch(this.handleError)
     }  
 
-    getTemperature(tbToken:string,_deviceId:string){
-
-    }
-
-    getHumidity(tbToken:string,_deviceId:string){
-        
-    }
-
-    getPower(tbToken:string,_deviceId:string){
-        
-    }
-
-    getDevices(tbToken:string): Observable<deviceDataObject[]> {
+    getTimeSeriesT(tbToken:string,_deviceId:string,_value:string,tStart:string,tEnd:string,interval:string):Observable<temperatureTS>   {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
-        return this.http.get(_tbBaseUrl+'/api/customer/'+_customerId+'/devices?limit=200',
+//        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
             {headers: headers})
-                .map(this.extractData)
+                .map(res => res.json())
                 .catch(this.handleError)
     }  
+    getTimeSeriesH(tbToken:string,_deviceId:string,_value:string,tStart:string,tEnd:string,interval:string):Observable<humidityTS>   {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
+//        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+            {headers: headers})
+                .map(res => res.json())
+                .catch(this.handleError)
+    }
+
+    getTimeSeriesP(tbToken:string,_deviceId:string,_value:string,tStart:string,tEnd:string,interval:string):Observable<presenceTS>   {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
+//        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+            {headers: headers})
+                .map(res => res.json())
+                .catch(this.handleError)
+    }
+
+    getTimeSeriesPwr(tbToken:string,_deviceId:string,_value:string,tStart:string,tEnd:string,interval:string):Observable<powerTS>   {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
+//        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+            {headers: headers})
+                .map(res => res.json())
+                .catch(this.handleError)
+    }
+
+    getTimeSeriesO(tbToken:string,_deviceId:string,_value:string,tStart:string,tEnd:string,interval:string):Observable<onoffTS>   {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
+//        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+            {headers: headers})
+                .map(res => res.json())
+                .catch(this.handleError)
+    }
 
     logout(): void {
     // clear token remove user from local storage to log user out
@@ -114,7 +175,6 @@ export class ApiService {
     private extractData(res: Response) {
     let body = res.json();
     return body.data || [];
-
 
     } 
 
