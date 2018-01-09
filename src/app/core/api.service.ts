@@ -117,7 +117,7 @@ private extractDataP(res: Response) {
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
 //        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
-        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=AVG',
             {headers: headers})
                 .map(res => res.json())
                 .catch(this.handleError)
@@ -127,7 +127,7 @@ private extractDataP(res: Response) {
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
 //        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
-        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=AVG',
             {headers: headers})
                 .map(res => res.json())
                 .catch(this.handleError)
@@ -138,7 +138,7 @@ private extractDataP(res: Response) {
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
 //        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
-        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=AVG',
             {headers: headers})
                 .map(res => res.json())
                 .catch(this.handleError)
@@ -149,7 +149,7 @@ private extractDataP(res: Response) {
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
 //        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
-        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=AVG',
             {headers: headers})
                 .map(res => res.json())
                 .catch(this.handleError)
@@ -160,7 +160,7 @@ private extractDataP(res: Response) {
         headers.append('Content-Type', 'application/json');
         headers.append('X-Authorization' ,  `Bearer ${tbToken}`); 
 //        http://192.168.1.104:8080/api/plugins/telemetry/DEVICE/3f82ad60-d071-11e7-9c2a-5997ca966e82/values/timeseries?keys=humidity,ilum,temperature&startTs=151241731200&endTs=1512417432789&interval=120000&limit=100&agg=NONE
-        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=NONE',
+        return this.http.get(_tbBaseUrl+'/api/plugins/telemetry/DEVICE/'+_deviceId+'/values/timeseries?keys='+_value+'&startTs='+tStart+'&endTs='+tEnd+'&interval='+interval+'&limit=1000&agg=AVG',
             {headers: headers})
                 .map(res => res.json())
                 .catch(this.handleError)

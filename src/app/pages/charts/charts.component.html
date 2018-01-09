@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+              <div style="display: block;">
+              <canvas baseChart width="400" height="300"
+                          [datasets]="lineChart1Data"
+                          [labels]="lineChart1Labels"
+                          [options]="lineChart1Options"
+                          [colors]="lineChart1Colors"
+                          [legend]="lineChart1Legend"
+                          [chartType]="lineChart1Type"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)" #chart1></canvas>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+              <div style="display: block;">
+              <canvas baseChart width="400" height="300"
+                          [datasets]="lineChart2Data"
+                          [labels]="lineChart2Labels"
+                          [options]="lineChart2Options"
+                          [colors]="lineChart2Colors"
+                          [legend]="lineChart2Legend"
+                          [chartType]="lineChart2Type"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)" #chart2></canvas>
+              </div>
+        </div>
+      </div>
+  </div>
+</div>

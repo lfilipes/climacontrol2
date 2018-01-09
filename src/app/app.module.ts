@@ -15,6 +15,7 @@ import { FilterPipe } from './core/filter-pipe';
 import { DashComponent } from './pages/dash/dash.component';
 import { ControlComponent } from './pages/control/control.component'; 
 import { ChartsModule } from 'ng2-charts';
+import { ChartsComponent } from './pages/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ChartsModule } from 'ng2-charts';
     DevicesComponent,
     FilterPipe,
     DashComponent,
-    ControlComponent
+    ControlComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { ApiService } from '../../core/api.service';
 import { DataService } from '../../core/data-service.service'; 
 // import { AuthService } from './../auth/auth.service';  --TBD
 import {HttpModule, Http, Response, Headers, RequestOptions } from '@angular/http';
-import * as moment from 'moment';
+
 import { Observable} from 'rxjs/Rx';
 import { mergeMap, flatMap } from 'rxjs/operators';
 import 'rxjs/add/operator/toPromise';
@@ -49,17 +49,6 @@ export class DashComponent implements OnInit {
   private relations:relationDataObject[] = [];
   private devices:deviceDataObject[] = [];
   private errorMessage;
-
-// lineChart
-  //public lineChartLabels : Array<any> = [1493199182012,1493199364487,1493201144363];
-  //public lineChartData : Array<any> = [{data: ["26", "27", "29"], label:"temperature"}];
-  public lineChartData :Array<any> = [{data:[], label: ''}];
-  public lineChartLabels: Array<any> = [];
-  public lineChartColors : Array<any> = [];
-  public lineChartLegend:boolean = false;
-  public lineChartType:string = 'line';
-  public lineChartOptions :any = {};
-// end chart test
 
   constructor(
     private http: Http,
@@ -104,10 +93,10 @@ export class DashComponent implements OnInit {
 
     storeTimeSeries(){
         console.log('devices length: ===>',  this.devices.length);
-        const _tEnd = (new Date('2018-1-2 20:00:00')).getTime().toString(); 
-        const _tStart = (new Date('2017-12-26 20:00:00')).getTime().toString(); // 7 dias
-        const _interval = '3600000';   // Agregation interval de 1 hora
-        // um total de 24 x 7 horas = 168 pontos
+        const _tEnd = (new Date('2018-01-02 20:00:00')).getTime().toString(); 
+        const _tStart = (new Date('2018-01-01 20:00:00')).getTime().toString(); // 1 dia
+        const _interval = '900000';   // Agregation interval de 15 minutos
+        // um total de 24 x 4 horas = 96 pontos
         let i : number = 0;
         for (var j=0; j < this.devices.length; j++) {
             if(this.devices[j][0].type == 'pwr_sensor' ) {
@@ -125,7 +114,7 @@ export class DashComponent implements OnInit {
                     console.log('onoffDim time series dim is: ====>', this.onoffDim[0]);
                     i=i++;
                     if (j === this.devices.length){
-                      this.drawCharts();
+                    this.router.navigate(['/charts']);
                     }
                 })
 
@@ -138,15 +127,18 @@ export class DashComponent implements OnInit {
                 .subscribe((data) => {
                     this.temperatureDim = data[0];
                     this.humidityDim = data[1];
-                    this.presenceDim = data[2];   
+                    this.presenceDim = data[2];  
+
                 },
                 (error) => {this.errorMessage=error; this.loading=false; },
                 () => {this.loading=false;
-                    console.log('temperature time series dim is: ====>', this.temperatureDim.temperature[0].ts);                 
+                   // console.log('temperature time series dim is: ====>', this.temperatureDim.temperature[0].ts); 
+                    console.log('temperature time series dim is: ====>', this.temperatureDim);                 
                     console.log('humidity time series dim is: ====>', this.humidityDim);
                     console.log('presence time series dim is: ====>', this.presenceDim);
+                    this.saveTimeSeries(); 
                     if (j === this.devices.length){
-                      this.drawCharts();
+                    this.router.navigate(['/charts']);
                     }
                 })
 
@@ -154,70 +146,24 @@ export class DashComponent implements OnInit {
             }   
         }
     }
+ 
+    saveTimeSeries() {
 
+      var timeStamps = [];
+      var temperature = [];
+      var humidity = [];
 
-    
-  // chart test continued
-  drawCharts() {
-  
-    this.lineChartColors = [
-      { // grey
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      for (var j=0; j < this.temperatureDim.temperature.length; j++){
+        timeStamps[j] = parseInt(this.temperatureDim.temperature[j].ts);
+        temperature[j] = parseFloat(this.temperatureDim.temperature[j].value).toFixed(1);
+        humidity[j] = parseFloat(this.humidityDim.humidity[j].value).toFixed(1);
       }
-    ];
-    this.lineChartOptions = {
-      responsive: true,
-      scales: {
-          xAxes: [{
-          type: 'time',
-              time: {
-                  parser: 'X',
-                  displayFormats: {minute: 'HH:mm'},
-                    // round: 'day'
-                    tooltipFormat: 'll HH:mm'
-                   },
-              ticks: {
-                  stepSize: 1,
-                  autoSkip: false,
-                  maxRotation: 90,
-                  minRotation: 90
-              }
-          }]
-      }
-    };
-    this.lineChartLegend = true;
-    this.lineChartType = 'line';
-    let timeStamps : Array<any> = [];
-    let temperatures = [];
-    
-    for (var j=0; j <168; j++){
-      timeStamps[j] = parseInt(this.temperatureDim.temperature[j].ts);
-      temperatures[j] = parseFloat(this.temperatureDim.temperature[j].value).toFixed(1); 
-    }
-    
-    let _chartData = [{ data:[],label:'Temperature'}];
-    _chartData[0].data = temperatures;
-    this.lineChartData = _chartData;
-    this.lineChartLabels = timeStamps;
-    
-    console.log('timeStamps: ====>', this.lineChartData);
-    console.log('temperatures: ====>', this.lineChartLabels);
-  }
-  
-    // events
-    public chartClicked(e:any):void {
-      console.log(e);
-    }
-  
-    public chartHovered(e:any):void {
-      console.log(e);
-    }
-  // end chart test continued
 
+
+      this._dataService.timeStampArray = timeStamps; 
+      this._dataService.temperatureArray = temperature; 
+      this._dataService.humidityArray = humidity; 
+    }
+ 
   }
 
