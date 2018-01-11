@@ -29,7 +29,6 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     this.parseCharts();
     setTimeout(_=> this.loadChart1());
     setTimeout(_=> this.loadChart2());
- //   this.loadCharts();
   }
 
   // lineChart1 ==============================================================================
@@ -124,8 +123,6 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   public lineChart2Legend:boolean = true;
   public lineChart2Type:string = 'line';
 
-
-
 // events
   public chartClicked(e:any):void {
     console.log(e);
@@ -141,8 +138,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     });
 
   }
-
-
+// fill chart 1 data 
   loadChart1() {
      
     this.temperatures = this._dataService.temperatureArray;
@@ -158,6 +154,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     this.chart[0].chart.config.data.labels = this.lineChart1Labels; // This line is necessary because ng2-charts is not updating the chart's labels automatically
     }
 
+    // fill chart 2 data
     loadChart2() {
      
       this.humidities = this._dataService.humidityArray;
