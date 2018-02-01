@@ -14,9 +14,14 @@ export class HeaderComponent implements OnInit {
   loggedIn: boolean = false;
   userName: string='';
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+  ) { 
+  }
 
-  login() {}
+  login() {
+    this.router.navigateByUrl('/login');
+  }
   logout() {}
 
   ngOnInit() {

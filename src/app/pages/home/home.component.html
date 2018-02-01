@@ -1,50 +1,9 @@
-<!-- src/app/pages/home/home.component.html -->
-<h1 class="text-center">{{pageTitle}}</h1>
-
-
-<div *ngIf="loading">loading...</div>
-
-<div *ngIf="errorMessage" class="alert alert-warning">
-  <strong>Warning!</strong> {{errorMessage}}
+<div class="myelement">
+  <H1>Bem vindo a App ClimaControl</H1>
 </div>
-
-<span></span>
-<h2 class="text-center">Lista de Salas Controladas</h2>
-<span></span>
-
-<table border =1>
-    <thead>
-      <tr>
-        <th colspan="4">Pesquise pela Sala :
-          <input type="text" [(ngModel)]="queryString">
-        </th>
-      </tr>
-      <tr>
-        <th style="width:80px;max-width:400px;"> Sala</th>
-        <th style="width:140px;max-width:400px;"> ID</th>
-        <th style="width:80px;max-width:400px;"> Descrição</th>
-        <th style="width:40px;max-width:400px;"> Dashboards</th>
-        <th style="width:40px;max-width:400px;"> Temp. Control</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of  assetData| FilterPipe: queryString : searchableList ">
-        <td>{{item.name}}</td>
-        <td>{{item.id.id}}</td> 
-        <td>{{item.additionalInfo.description}}</td>
-        <td><button class="btn"> <a [routerLink]="['/dash']" (click)="storeAssetId(item.id.id)">Dash</a> </button></td> 
-        <td><button class="btn"> <a [routerLink]="['/control']" (click)="storeAssetId(item.id.id)">Control</a> </button></td>        
-      </tr>
-    </tbody>
-   
-  </table>
-
-
-<!--   testes
-<td><a [routerLink]="['/contact-detail', contact.id]" (click)="onSelect(contact)">Details</a></td>
- <td>{{item.id.id}}</td>
-<a [routerLink]="['/devices']" [queryParams]="{ id: item.id.id}">{{item.id.id}}</a>
-  <a [routerLink]="['/event', event._id]"></a>
-  <td><button class="btn btn-primary" (click)="devices(item.id.id)"> Devices </button></td> 
-<td><a [routerLink]="['/devices',item.id.id]">{{item.id.id}} </a> </td>
--->
+<div class="myelement">
+  <p>Por Favor faça Login para utilizar o sistema</p>
+</div>
+<div class="myelement">
+  <button routerLink="/login" class="btn btn-primary">Login</button>
+</div>

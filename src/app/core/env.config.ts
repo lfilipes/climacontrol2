@@ -14,5 +14,5 @@ export const ENV = {
 
 export const _userName = 'colortel001@ucontrol.net.br';
 export const _password = 'Colortel@123';
-export const _tbBaseUrl = "http://35.199.99.95:8080";
+export const _tbBaseUrl = "http://35.199.71.59:8080";
 export const _customerId = "2d977a80-e2a6-11e7-a2cc-0b6a5e10d27e";

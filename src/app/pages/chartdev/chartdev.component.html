@@ -1,0 +1,71 @@
+
+  <div class="container" style="padding:'20px">
+      <div  class="row text-center">
+        <div  class="col-md-12">
+          <div id="divtitle" class="content"><h1>Sala001</h1></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="container" style="padding:'10px">
+      <div  class="row text-center">
+        <div  class="col-md-6">
+          <div  class="content"><h4>Status</h4></div>
+          <ngx-gauge type="full" max ="1" value="1" thick="10" size="200" append=" LIGADO"></ngx-gauge>
+        </div>
+        <div  class="col-md-6">
+          <div  class="content"><h4>Temperatura</h4></div>
+          <ngx-gauge type="arch" value="68" thick="15" size="200" label="Speed" append="mph"></ngx-gauge>
+        </div>
+      </div>
+  </div>
+
+  <div class="container" style="padding:'20px">
+      <div  class="row text-center">
+        <div  class="col-md-12">
+          <div id="divtitle" class="content"><h1>Consumo de Energia</h1></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="container"style="padding:'10px">
+      <div  class="row text-center">
+          <div  class="col-md-3">
+              <div  class="content"><h4>Condicionador 1</h4></div>
+              <ngx-gauge type="arch" value="68" thick="15" size="200" label="Speed" append="mph"></ngx-gauge>
+            </div>
+          <div  class="col-md-3">
+            <div  class="content"><h4>Condicionador 2</h4></div>
+            <ngx-gauge type="arch" value="68" thick="15" size="200" label="Speed" append="mph"></ngx-gauge>
+          </div>
+          <div  class="col-md-3">
+            <div  class="content"><h4>Condicionador 3</h4></div>
+            <ngx-gauge type="arch" value="68" thick="15" size="200" label="Speed" append="mph"></ngx-gauge>
+          </div>
+          <div  class="col-md-3">
+              <div  class="content"><h4>Condicionador 4</h4></div>
+              <ngx-gauge type="arch" value="68" thick="15" size="200" label="Speed" append="mph"></ngx-gauge>
+            </div>
+      </div>
+  </div>
+
+  <div class="container" style="padding:'20px">
+      <div  class="row text-center">
+        <div  class="col-md-12">
+          <div id="divtitle" class="content"><h1>Graficos e Controles</h1></div>
+        </div>
+      </div>
+  </div>
+
+    <div class="container" style="padding:'20px">
+      <div  class="row text-center">
+        <div  class="col-md-6">
+          <h1> <a [routerLink]="['/dash']">Dashboards</a> </h1>
+        </div>
+        <div  class="col-md-6">
+            <h1> <a [routerLink]="['/control']">Controles</a> </h1>
+          </div>
+        </div>
+    </div>
+
+

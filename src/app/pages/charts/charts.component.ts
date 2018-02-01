@@ -14,8 +14,19 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
   private chart: Array<any> = [];
   private temperatures : Array<any>;
-  private humidities : Array<any>;
   private timeStamps : Array<any>;
+  private pwrp1Ar1 : Array<any>;
+  private pwrp1Ar2 : Array<any>;
+  private pwrp1Ar3 : Array<any>;
+  private pwrp1Ar4 : Array<any>;
+  private pwrp2Ar1 : Array<any>;
+  private pwrp2Ar2 : Array<any>;
+  private pwrp2Ar3 : Array<any>;
+  private pwrp2Ar4 : Array<any>;
+  private pwrp3Ar1 : Array<any>;
+  private pwrp3Ar2 : Array<any>;
+  private pwrp3Ar3 : Array<any>;
+  private pwrp3Ar4 : Array<any>;
 
   constructor(
     private _dataService: DataService, 
@@ -28,7 +39,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.parseCharts();
     setTimeout(_=> this.loadChart1());
-    setTimeout(_=> this.loadChart2());
+ //   setTimeout(_=> this.loadChart2());
   }
 
   // lineChart1 ==============================================================================
@@ -79,7 +90,9 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
   // lineChart2 ===============================================================================
   public lineChart2Data:Array<any> = [
-    {data: [], label: 'Humidity( % )'}
+    {data: [], label: 'Phase1 (KwH)'},
+    {data: [], label: 'Phase2 (KwH)'},
+    {data: [], label: 'Phase3 (KwH)'}
   ];
   public lineChart2Labels:Array<any> = [];
   public lineChart2Options = {
@@ -155,20 +168,23 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     }
 
     // fill chart 2 data
-    loadChart2() {
-     
-      this.humidities = this._dataService.humidityArray;
-      console.log('humidity array: ====>', this.humidities);
+    loadChart2() { 
+      this.pwrp1Ar1 = this._dataService.powerp1Array[0];
+      this.pwrp2Ar1 = this._dataService.powerp2Array[0];
+      this.pwrp3Ar1 = this._dataService.powerp3Array[0];
 
       this.timeStamps = this._dataService.timeStampArray;
-  
       this.lineChart2Data = [ // Update the chart data
-          {data: this.humidities, label: 'Humidity ( % )'}
-      ];
-  
+          {data: this.pwrp1Ar1, label: 'Pwr Phase 1 ( KwH )'},
+          {data: this.pwrp2Ar1, label: 'Pwr Phase 2 ( KwH )'},
+          {data: this.pwrp3Ar1, label: 'Pwr Phase 3 ( KwH )'}
+      ]; 
    //   let range = n => Array.from(Array(n).keys()) // This is a function decleration. The function is exactly the same as Python's range(n) function. ECMAScript 6 feature used.
    //   this.lineChart1Labels = range(tempArr.length);
       this.lineChart2Labels = this.timeStamps;
       this.chart[1].chart.config.data.labels = this.lineChart2Labels; // This line is necessary because ng2-charts is not updating the chart's labels automatically
-      }
+    }
+
+
+
 }

@@ -1,0 +1,71 @@
+
+  <div class="container" style="padding:'20px">
+    <div  class="row text-center">
+      <div  class="col-md-12">
+        <div id="divtitle" class="content"><h1>Sala001</h1></div>
+      </div>
+    </div>
+</div>
+
+<div class="container" style="padding:'10px">
+    <div  class="row text-center">
+      <div  class="col-md-6">
+        <div  class="content"><h4>Status</h4></div>
+        <ngx-gauge [foregroundColor]="statusGaugeForeCol" [type]="statusGaugeType" [min]="statusGaugeMin" [max]="statusGaugeMax" [value]="statusGaugeValue" [thick]="statusGaugeThick" [size]="statusGaugeSize" [append]="statusGaugeAppend"></ngx-gauge>
+      </div>
+      <div  class="col-md-6">
+        <div  class="content"><h4>Temperatura</h4></div>
+        <ngx-gauge [foregroundColor]="tempGaugeForeCol" [type]="tempGaugeType" [min]="tempGaugeMin" [max]="tempGaugeMax" [value]="tempGaugeValue" [thick]="tempGaugeThick" [size]="tempGaugeSize" [append]="tempGaugeAppend"></ngx-gauge>
+      </div>
+    </div>
+</div>
+
+<div class="container" style="padding:'20px">
+    <div  class="row text-center">
+      <div  class="col-md-12">
+        <div id="divtitle" class="content"><h1>Consumo de Energia</h1></div>
+      </div>
+    </div>
+</div>
+
+<div class="container"style="padding:'10px">
+    <div  class="row text-center">
+        <div  class="col-md-3">
+        <div  class="content"><h4>Ar #1</h4></div>
+            <ngx-gauge [label]="pwrA1GaugeLabel" [backgroundColor]="statusGaugeBackCol" [foregroundColor]="pwrA1GaugeForeCol" [type]="pwrA1GaugeType" [min]="pwrA1GaugeMin" [max]="pwrA1GaugeMax" [value]="pwrA1GaugeValue" [thick]="pwrA1GaugeThick" [size]="pwrA1GaugeSize" [append]="pwrA1GaugeAppend"></ngx-gauge>
+        </div>
+        <div  class="col-md-3">
+          <div  class="content"><h4>Ar #2</h4></div>
+            <ngx-gauge [label]="pwrA2GaugeLabel" [foregroundColor]="pwrA2GaugeForeCol" [type]="pwrA2GaugeType" [min]="pwrA2GaugeMin" [max]="pwrA2GaugeMax" [value]="pwrA2GaugeValue" [thick]="pwrA2GaugeThick" [size]="pwrA2GaugeSize" [append]="pwrA2GaugeAppend"></ngx-gauge>
+        </div>
+        <div  class="col-md-3">
+          <div  class="content"><h4>Ar #3</h4></div>
+             <ngx-gauge [label]="pwrA3GaugeLabel" [foregroundColor]="pwrA3GaugeForeCol" [type]="pwrA3GaugeType" [min]="pwrA3GaugeMin" [max]="pwrA3GaugeMax" [value]="pwrA3GaugeValue" [thick]="pwrA3GaugeThick" [size]="pwrA3GaugeSize" [append]="pwrA3GaugeAppend"></ngx-gauge>
+        </div>
+        <div  class="col-md-3">
+            <div  class="content"><h4>Ar #4</h4></div>
+              <ngx-gauge [label]="pwrA4GaugeLabel" [foregroundColor]="pwrA4GaugeForeCol" [type]="pwrA4GaugeType" [min]="pwrA4GaugeMin" [max]="pwrA4GaugeMax" [value]="pwrA4GaugeValue" [thick]="pwrA4GaugeThick" [size]="pwrA4GaugeSize" [append]="pwrA4GaugeAppend"></ngx-gauge>
+          </div>
+    </div>
+</div>
+
+<div class="container" style="padding:'20px">
+    <div  class="row text-center">
+      <div  class="col-md-12">
+        <div id="divtitle" class="content"><h1>Graficos e Controles</h1></div>
+      </div>
+    </div>
+</div>
+
+  <div class="container" style="padding:'20px">
+    <div  class="row text-center">
+      <div  class="col-md-6">
+        <h1> <a [routerLink]="['/pushdata']">Dashboards</a> </h1>
+      </div>
+      <div  class="col-md-6">
+          <h1> <a [routerLink]="['/control']">Controles</a> </h1>
+        </div>
+      </div>
+  </div>
+
+
